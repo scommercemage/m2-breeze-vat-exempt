@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Scommerce VatExempt Module module file for define module name and version of the module
+ * @category   Scommerce
+ * @package    Scommerce_VatExempt
+ * @author     Scommerce Mage <core@scommerce-mage.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Scommerce_BreezeVatExempt" setup_version="2.0.0" />
+    <sequence>
+        <module name="Scommerce_VatExempt"/>
+    </sequence>
+</config>

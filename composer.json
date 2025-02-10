@@ -1,0 +1,24 @@
+{
+    "name": "scommerce/breeze-vat-exempt",
+    "description": "VAT Exempt Module For Magento 2.0",
+    "require": {
+        "scommerce/vat-exempt": "2.0.*"
+    },
+    "type": "magento2-module",
+    "license": "Commercial",
+    "version": "2.0.21",
+    "authors": [
+        {
+            "name": "Scommerce Mage",
+            "email": "core@scommerce-mage.com"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Scommerce\\BreezeVatExempt\\": ""
+        }
+    }
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Scommerce VatExempt applying Vat Exempt
+ *
+ * @category   Scommerce
+ * @package    Scommerce_VatExempt
+ * @author     Scommerce Mage <core@scommerce-mage.com>
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="vatexempt">
+            <module name="Scommerce_BreezeVatExempt"/>
+        </route>
+    </router>
+</config>

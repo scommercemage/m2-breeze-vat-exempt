@@ -1,0 +1,93 @@
+<?php
+/**
+ * This file for show vat Exempt checkbox on cart page
+ * @category   Scommerce
+ * @package    Scommerce_VatExempt
+ * @author     Scommerce Mage <core@scommerce-mage.com>
+ */
+?>
+<?php $helper = $this->helper('Scommerce\VatExempt\Helper\Data'); ?>
+<?php if ($helper->isEnabled()) : ?>
+    <?php if ($helper->isEligibleForVatExempt()): ?>
+        <script data-breeze>
+            require([
+                'jquery',
+            ], function ($) {
+                'use strict';
+
+                var formKey = $("[name='form_key']").val();
+                var actionUrl = BASE_URL + 'vatexempt/action/breeze';
+
+
+
+                var updateTotals = function () {
+                    var requestData = {};
+                    if ($('#vat_exempt_apply_checkbox').prop('checked')) {
+                        requestData = {
+                            action: 'apply',
+                            form_key: formKey
+                        }
+                    } else {
+                        requestData = {
+                            action: 'remove',
+                            form_key: formKey
+                        }
+                    }
+                    $.ajax({
+                        url: actionUrl,
+                        type: 'POST',
+                        dataType: 'json',
+                        data: requestData,
+                        complete: function(response) {
+                            if (response.body.success) {
+                                if (response.body.amount) {
+                                    updateTotalsHtml(response.body.amount);
+                                } else {
+                                    removeTotalRow();
+                                }
+                            }
+                        }
+                    });
+                }
+
+                var removeTotalRow = function () {
+                    $('.totals.vatexempt').remove();
+                }
+
+                var updateTotalsHtml = function (amount) {
+                    var newRow = createRow(amount);
+                    var table = $('table.data.table.totals');
+                    var totalsTaxRow = table.find('tr.totals-tax');
+                    removeTotalRow();
+
+                    if (totalsTaxRow.length) {
+                        totalsTaxRow.after(newRow);
+                    } else {
+                        table.find('tbody').append(newRow);
+                    }
+                }
+
+                var createRow = function (amount) {
+                    var newAmount = $.catalog.priceUtils.formatPriceLocale(-amount);
+                    return $('<tr class="totals vatexempt">' +
+                        '<th class="mark" scope="row">' +
+                        '<span><?= __('Vat Exepmted') ?></span>' +
+                        '</th>' +
+                        '<td class="amount">' +
+                        `<span class="price">${newAmount}</span>` +
+                        '</td>' +
+                        '</tr>');
+                }
+
+                $('#vat_exempt_apply_checkbox').on('change', function(){
+                    updateTotals();
+                });
+
+                $(document).on('breeze:load', function(){
+                    updateTotals();
+                });
+            });
+        </script>
+    <?php endif; ?>
+<?php endif; ?>
+

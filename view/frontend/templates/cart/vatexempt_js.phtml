@@ -39,9 +39,10 @@
                         dataType: 'json',
                         data: requestData,
                         complete: function(response) {
-                            if (response.body.success) {
-                                if (response.body.amount) {
-                                    updateTotalsHtml(response.body.amount);
+                            if (response.body.success || response.success) {
+                                if (response.body.amount || response.amount) {
+                                    var amount = response.body.amount !== undefined ? response.body.amount : response.amount;
+                                    updateTotalsHtml(amount);
                                 } else {
                                     removeTotalRow();
                                 }

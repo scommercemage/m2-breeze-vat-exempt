@@ -41,7 +41,7 @@
                         complete: function(response) {
                             var result = response.body ? response.body : response;
                             if (result.success) {
-                                if (result.success) {
+                                if (result.amount) {
                                     updateTotalsHtml(result.amount);
                                 } else {
                                     removeTotalRow();
@@ -84,7 +84,7 @@
                     updateTotals();
                 });
 
-                $(document).on('breeze:load', function(){
+                $(document).ready(function(){
                     updateTotals();
                 });
             });

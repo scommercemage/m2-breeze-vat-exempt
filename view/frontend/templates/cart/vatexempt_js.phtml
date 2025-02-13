@@ -12,7 +12,9 @@
         <script data-breeze>
             require([
                 'jquery',
-            ], function ($) {
+                'Magento_Checkout/js/model/quote',
+                'Swissup_Breeze/js/components/cart/estimation-services'
+            ], function ($, quote, estimation) {
                 'use strict';
 
                 var formKey = $("[name='form_key']").val();
@@ -46,6 +48,9 @@
                                 } else {
                                     removeTotalRow();
                                 }
+                                estimation.getTotals().then(result => {
+                                    quote.setTotals(result.body);
+                                });
                             }
                         }
                     });
